@@ -14,9 +14,7 @@ class ActivitiDemoTests {
 
     @Test
     public void test_createDatabase() {
-        // 构建流程引擎对象
-        ProcessEngine pe = processEngineConfiguration.buildProcessEngine(); // 调用访方法才会创建数据表
-        // 调用close方法时，才会删除
+        ProcessEngine pe = processEngineConfiguration.buildProcessEngine();
         pe.close();
     }
 

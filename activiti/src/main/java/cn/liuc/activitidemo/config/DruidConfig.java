@@ -12,9 +12,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DruidConfig {
-    /**
-     * 使用DruidDataSourceBuilder创建数据源
-     */
+
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druidDataSource() {

@@ -11,7 +11,6 @@ import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * @Date: 2019/11/16 13:12
@@ -20,12 +19,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 public class ActivitiConfig {
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private ResourcePatternResolver resourceLoader;
-    /**
-     * 初始化配置，将创建28张表
-     * @return
-     */
+
     @Bean
     public StandaloneProcessEngineConfiguration processEngineConfiguration() {
         StandaloneProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
