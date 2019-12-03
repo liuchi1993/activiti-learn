@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.liuc.activitidemo.service.ExportExcelService;
 import cn.liuc.activitidemo.vo.UserVo;
-import com.alibaba.excel.EasyExcel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/v1")
 public class HealthController {
+
+    @Autowired
+    ExportExcelService exportExcelService;
 
     @GetMapping("/health")
     public String health() {
@@ -38,10 +42,8 @@ public class HealthController {
         response.setCharacterEncoding("utf-8");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
         try {
-            EasyExcel.write(response.getOutputStream(), UserVo.class)
-                    .autoCloseStream(Boolean.FALSE)
-                    .sheet("用户信息下载")
-                    .doWrite(list);
+//            ExcelUtil.exportExcel(response.getOutputStream(),"用户下载", UserVo.class, list);
+            exportExcelService.exportExcel(response);
         } catch (IOException e) {
             response.reset();
             response.setContentType("application/json");
