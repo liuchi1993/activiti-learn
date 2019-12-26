@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuc.activitidemo.dao.ActHiActinstDao">
+
+    <resultMap type="cn.liuc.activitidemo.entity.ActHiActinstEntity" id="ActHiActinstMap">
+        <result property="id" column="ID_" jdbcType="VARCHAR"/>
+        <result property="procDefId" column="PROC_DEF_ID_" jdbcType="VARCHAR"/>
+        <result property="procInstId" column="PROC_INST_ID_" jdbcType="VARCHAR"/>
+        <result property="executionId" column="EXECUTION_ID_" jdbcType="VARCHAR"/>
+        <result property="actId" column="ACT_ID_" jdbcType="VARCHAR"/>
+        <result property="taskId" column="TASK_ID_" jdbcType="VARCHAR"/>
+        <result property="callProcInstId" column="CALL_PROC_INST_ID_" jdbcType="VARCHAR"/>
+        <result property="actName" column="ACT_NAME_" jdbcType="VARCHAR"/>
+        <result property="actType" column="ACT_TYPE_" jdbcType="VARCHAR"/>
+        <result property="assignee" column="ASSIGNEE_" jdbcType="VARCHAR"/>
+        <result property="startTime" column="START_TIME_" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="END_TIME_" jdbcType="TIMESTAMP"/>
+        <result property="duration" column="DURATION_" jdbcType="BIGINT"/>
+        <result property="deleteReason" column="DELETE_REASON_" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="TENANT_ID_" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ActHiActinstMap">
+        select
+          ID_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, ACT_ID_, TASK_ID_, CALL_PROC_INST_ID_, ACT_NAME_, ACT_TYPE_, ASSIGNEE_, START_TIME_, END_TIME_, DURATION_, DELETE_REASON_, TENANT_ID_
+        from activiti.act_hi_actinst
+        where ID_ = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ActHiActinstMap">
+        select
+          ID_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, ACT_ID_, TASK_ID_, CALL_PROC_INST_ID_, ACT_NAME_, ACT_TYPE_, ASSIGNEE_, START_TIME_, END_TIME_, DURATION_, DELETE_REASON_, TENANT_ID_
+        from activiti.act_hi_actinst
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ActHiActinstMap">
+        select
+          ID_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, ACT_ID_, TASK_ID_, CALL_PROC_INST_ID_, ACT_NAME_, ACT_TYPE_, ASSIGNEE_, START_TIME_, END_TIME_, DURATION_, DELETE_REASON_, TENANT_ID_
+        from activiti.act_hi_actinst
+        <where>
+            <if test="id != null and id != ''">
+                and ID_ = #{id}
+            </if>
+            <if test="procDefId != null and procDefId != ''">
+                and PROC_DEF_ID_ = #{procDefId}
+            </if>
+            <if test="procInstId != null and procInstId != ''">
+                and PROC_INST_ID_ = #{procInstId}
+            </if>
+            <if test="executionId != null and executionId != ''">
+                and EXECUTION_ID_ = #{executionId}
+            </if>
+            <if test="actId != null and actId != ''">
+                and ACT_ID_ = #{actId}
+            </if>
+            <if test="taskId != null and taskId != ''">
+                and TASK_ID_ = #{taskId}
+            </if>
+            <if test="callProcInstId != null and callProcInstId != ''">
+                and CALL_PROC_INST_ID_ = #{callProcInstId}
+            </if>
+            <if test="actName != null and actName != ''">
+                and ACT_NAME_ = #{actName}
+            </if>
+            <if test="actType != null and actType != ''">
+                and ACT_TYPE_ = #{actType}
+            </if>
+            <if test="assignee != null and assignee != ''">
+                and ASSIGNEE_ = #{assignee}
+            </if>
+            <if test="startTime != null">
+                and START_TIME_ = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and END_TIME_ = #{endTime}
+            </if>
+            <if test="duration != null">
+                and DURATION_ = #{duration}
+            </if>
+            <if test="deleteReason != null and deleteReason != ''">
+                and DELETE_REASON_ = #{deleteReason}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and TENANT_ID_ = #{tenantId}
+            </if>
+        </where>
+    </select>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from activiti.act_hi_actinst where ID_ = #{id}
+    </delete>
+
+</mapper>
